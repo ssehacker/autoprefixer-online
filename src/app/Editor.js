@@ -9,11 +9,14 @@ class Editor extends React.Component {
 
   constructor(props) {
     super(props);
-    hljs.configure({useBR: true});
     this.state = {
       css: '',
       html: ''
     };
+  }
+
+  componentDidMount() {
+    hljs.configure({useBR: true});
   }
 
   handleChange(e) {
