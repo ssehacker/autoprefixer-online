@@ -18,7 +18,7 @@ const path = require('path');
 
 const autoprefixer = require('autoprefixer');
 
-let isDev = true;
+let isDev = process.env.NEO_ENV === 'dev';
 
 const BannerPlugin = webpack.BannerPlugin;
 //webpack 插件

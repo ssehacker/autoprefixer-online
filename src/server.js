@@ -6,6 +6,8 @@ import Koa from 'koa';
 import path from 'path';
 import views from 'koa-views';
 import Router from 'koa-router';
+import compress from 'koa-compress';
+import zlib from 'zlib';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
 import ReactApp from './app';
@@ -13,6 +15,14 @@ import ReactApp from './app';
 
 const app = new Koa();
 const router = new Router();
+
+app.use(compress({
+  filter: function (content_type) {
+    return /text/i.test(content_type) || /javascript/i.test(content_type);
+  },
+  threshold: 2048,
+  flush: zlib.Z_SYNC_FLUSH,
+}));
 
 app.use(serve(path.resolve(__dirname , '../dist/assets')));
 app.use(serve(path.resolve(__dirname ,'../public')));
