@@ -1,5 +1,6 @@
 .ws-app {
   position: relative;
+	min-height: 100vh;
 	.ws-header {
 		height: 100px;
 		line-height: 100px;
@@ -96,6 +97,7 @@
 		display: flex;
 		width: 100vw;
 		height: 600px;
+		min-height: calc(~"100vh - 325px");
 		font-family: Consolas, Monaco, 'Andale Mono', monospace;
 		.ws-editor-input {
 			flex-basis: 50%;
