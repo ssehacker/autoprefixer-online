@@ -7,11 +7,14 @@ import postcss from 'postcss';
 
 class Editor extends React.Component {
 
+  static propTypes = {
+    filter: React.PropTypes.string,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       css: '',
-      html: ''
     };
   }
 
@@ -19,30 +22,35 @@ class Editor extends React.Component {
     hljs.configure({useBR: true});
   }
 
-  handleChange(e) {
-    const css = e.target.value;
+  parseCSS(css, filter) {
+    var isBrowser=new Function("try {return this===window;}catch(e){ return false;}");
 
-    try {
-      let parsedCSS = postcss([autoprefixer({browsers: ['last 2 version', '> 0.01%']})]).process(css).css;
-      let res = hljs.highlightAuto(parsedCSS, ['css']);
-
-      this.setState({
-        css,
-        html: res.value,
-      });
-    } catch (e) {
-      console.log(e.message);
-      this.setState({
-        css,
-      });
+    if(!isBrowser()) {
+      return '';
     }
 
+    try {
+      let parsedCSS = postcss([autoprefixer({browsers: filter.split(',')})]).process(css).css;
+      let res = hljs.highlightAuto(parsedCSS, ['css']);
+
+      return res.value;
+    } catch (e) {
+      console.log(e);
+      return e.message;
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      css: e.target.value,
+    });
   }
 
   render() {
     const me = this;
     const { handleChange } = this;
-    const { css, html } = this.state;
+    const { css } = this.state;
+    const html = me.parseCSS(css, me.props.filter);
     return (
       <div className="ws-editor">
         <div className="ws-editor-input">

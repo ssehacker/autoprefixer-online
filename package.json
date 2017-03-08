@@ -52,6 +52,7 @@
     "postcss": "^5.2.15",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "webpack-node-externals": "^1.5.4"
+    "webpack-node-externals": "^1.5.4",
+    "ws-footer": "0.0.8"
   }
 }
