@@ -2,7 +2,6 @@
  * Created by ssehacker on 2017/3/4.
  */
 import React from 'react';
-import Footer from 'ws-footer';
 import Editor from './Editor';
 import Filter from './Filter';
 
@@ -30,7 +29,6 @@ class App extends React.Component {
         <h1 className="ws-header">Autoprefixer CSS online</h1>
         <Filter value={filter} onBlur={handleFilterChange.bind(me)} />
         <Editor filter={filter} />
-        <Footer />
       </div>
     );
   }
