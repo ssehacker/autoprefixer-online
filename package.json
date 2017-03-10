@@ -6,6 +6,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive -t 5000 --compilers js:babel-core/register",
     "start": "node ./dist/server.js --name autoprefixer",
+    "build": "webpack",
     "eslint": "./node_modules/.bin/eslint src/;exit 0"
   },
   "author": "zhouyong",
